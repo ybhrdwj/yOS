@@ -1,5 +1,6 @@
 import { Hero } from '@/components/Hero'
 import { Projects } from '@/components/Projects'
+import { Blog } from '@/components/Blog'
 
 export default function Home() {
   return (
@@ -8,7 +9,6 @@ export default function Home() {
       
       {/* Content Grid */}
       <div className="mx-auto grid w-[1084px] grid-cols-12 gap-5">
-        {/* One column gap at start */}
         <div className="col-span-1" />
         
         {/* Projects - 7 columns */}
@@ -16,12 +16,11 @@ export default function Home() {
           <Projects />
         </div>
 
-        {/* Blog section - 3 columns */}
-        <div className="col-span-3">
-          {/* Blog component will go here */}
+        {/* Blog section - 3 columns but shifted more left */}
+        <div className="col-span-3 -ml-28">
+          <Blog />
         </div>
 
-        {/* One column gap at end */}
         <div className="col-span-1" />
       </div>
     </main>
