@@ -1,7 +1,20 @@
+"use client"
+
 import Image from 'next/image'
 import { LinkText } from './LinkText'
+import { Mail, Github, Instagram } from 'lucide-react'
+import { useState } from 'react'
 
 export function Hero() {
+  const [showCopied, setShowCopied] = useState(false)
+
+  const handleEmailClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    navigator.clipboard.writeText('yb@yashbhrdwaj.com')
+    setShowCopied(true)
+    setTimeout(() => setShowCopied(false), 2000)
+  }
+
   return (
     <div className="mx-auto grid w-[1084px] grid-cols-12 gap-5 py-16">
       {/* One column gap at start */}
@@ -48,20 +61,90 @@ export function Hero() {
                 withBorder
               />
             </li>
-            <li>I&apos;ve worked for 220 companies since 2016</li>
+            <li>
+              I&apos;ve worked for 220 companies since 2016{' '}
+              <LinkText
+                variant="image-stack"
+                text=""
+                images={[
+                  { src: "/logos/gates.png", alt: "Gates Foundation" },
+                  { src: "/logos/userpilot.png", alt: "Userpilot" },
+                  { src: "/logos/asy.png", alt: "Asymmetric" },
+                  { src: "/logos/cointelegraph.png", alt: "CoinTelegraph" },
+                  { src: "/logos/synthesis.png", alt: "Synthesis" },
+                  { src: "/logos/alpaca.png", alt: "Alpaca" },
+                ]}
+              />
+            </li>
             <li>25 years old, based in Bombay</li>
-            <li>Built the first meme network of India to 16M followers</li>
-            <li>I write a pretty smart newsletter called Product Hacks</li>
+            <li>
+              I built the first meme page network in India to 16M followers{' '}
+              <LinkText
+                variant="image-stack"
+                text=""
+                images={[
+                  { src: "/logos/im.png", alt: "Indian Memes" }
+                ]}
+              />
+            </li>
+            <li>
+              I write a pretty smart newsletter called{' '}
+              <LinkText
+                variant="single-image-link"
+                text="Product Hacks"
+                href="https://producthacks.io"
+                images={{ src: "/logos/producthacks.png", alt: "Product Hacks" }}
+                withBorder
+              />
+            </li>
           </ul>
         </div>
 
         {/* Social and Music - placeholder icons for now */}
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-4">
-            <a href="#" className="text-gray-400 hover:text-gray-600">Email</a>
-            <a href="#" className="text-gray-400 hover:text-gray-600">Twitter</a>
-            <a href="#" className="text-gray-400 hover:text-gray-600">Instagram</a>
-            <a href="#" className="text-gray-400 hover:text-gray-600">GitHub</a>
+            <a 
+              href="#" 
+              onClick={handleEmailClick}
+              className="group relative text-gray-400 hover:text-gray-600"
+            >
+              <Mail className="h-5 w-5" />
+              {showCopied && (
+                <div className="absolute bottom-full left-1/2 mb-1 -translate-x-1/2 transform whitespace-nowrap rounded-full bg-gray-900 px-2 py-0.5 text-xs text-white">
+                  Copied
+                </div>
+              )}
+            </a>
+            <a 
+              href="https://x.com/ybhrdwj" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-gray-600"
+            >
+              <Image 
+                src="/x.svg" 
+                alt="X (Twitter)" 
+                width={20} 
+                height={20}
+                className="[&>path]:fill-gray-400 hover:[&>path]:fill-gray-600"
+              />
+            </a>
+            <a 
+              href="https://instagram.com/ybhrdwj" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-gray-600"
+            >
+              <Instagram className="h-5 w-5" />
+            </a>
+            <a 
+              href="https://github.com/ybhrdwj" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-gray-600"
+            >
+              <Github className="h-5 w-5" />
+            </a>
           </div>
           <button className="flex items-center gap-2 text-gray-400">
             <span>Listening to Dissolve</span>

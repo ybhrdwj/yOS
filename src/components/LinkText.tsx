@@ -21,10 +21,10 @@ type LinkTextProps = {
 }
 
 export function LinkText({ variant, text, href, images, className = '', withBorder = false }: LinkTextProps) {
-  const imageSize = 18 // Increased from 16px to 18px
+  const imageSize = 18
 
   const renderImage = (image: ImageProps) => (
-    <div className="flex h-4 items-center">
+    <div className="flex h-[18px] items-center">
       <Image
         src={image.src}
         alt={image.alt}
@@ -38,10 +38,15 @@ export function LinkText({ variant, text, href, images, className = '', withBord
   switch (variant) {
     case 'single-image-link':
       return (
-        <div className={`inline-flex items-center gap-1.5 ${className}`}>
+        <div className={`inline-flex items-center ${className}`}>
           {renderImage((images as ImageProps))}
-          <a href={href} className="group inline-flex items-center gap-0.5">
-            <span className="border-b border-gray-300 leading-none group-hover:border-gray-400">{text}</span>
+          <a 
+            href={href} 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-0.5 ml-1.5"
+          >
+            <span className="inline-block border-b border-gray-300 leading-[1.15] group-hover:border-gray-400">{text}</span>
             <svg 
               className="relative h-4 w-4 text-gray-400 transition-all group-hover:translate-x-[3px] group-hover:-translate-y-[3px]"
               viewBox="0 0 24 24" 
@@ -58,23 +63,32 @@ export function LinkText({ variant, text, href, images, className = '', withBord
 
     case 'image-stack':
       return (
-        <div className={`inline-flex items-center gap-1.5 ${className}`}>
-          <div className="flex -space-x-1">
+        <div className={`inline-flex items-center ${className}`}>
+          <div className="flex -space-x-1.5">
             {(images as ImageProps[]).map((image, index) => (
-              <div key={index} className="relative">
-                {renderImage(image)}
+              <div key={index} className="group relative flex h-[18px] items-center">
+                <div className="absolute bottom-full left-1/2 mb-1 hidden -translate-x-1/2 transform whitespace-nowrap rounded-full bg-gray-900 px-2 py-0.5 text-xs text-white group-hover:block">
+                  {image.alt}
+                </div>
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  width={imageSize}
+                  height={imageSize}
+                  className="rounded-full object-contain ring-1 ring-white"
+                />
               </div>
             ))}
           </div>
-          <span>{text}</span>
+          <span className="ml-1.5 leading-tight">{text}</span>
         </div>
       )
 
     case 'single-image-text':
       return (
-        <div className={`inline-flex items-center gap-1.5 ${className}`}>
+        <div className={`inline-flex items-center ${className}`}>
           {renderImage((images as ImageProps))}
-          <span>{text}</span>
+          <span className="ml-1.5 leading-tight">{text}</span>
         </div>
       )
 
