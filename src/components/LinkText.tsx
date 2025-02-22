@@ -7,13 +7,13 @@ type ImageProps = {
 
 type LinkTextProps = {
   // Different possible variants
-  variant: 'single-image-link' | 'image-stack' | 'single-image-text'
+  variant: 'single-image-link' | 'image-stack' | 'single-image-text' | 'text-link'
   // Main text content
   text: string
   // Optional link URL (for variants that need it)
   href?: string
   // Single image or array of images
-  images: ImageProps | ImageProps[]
+  images?: ImageProps | ImageProps[]
   // Optional className for custom styling
   className?: string
   // New prop for border
@@ -90,6 +90,28 @@ export function LinkText({ variant, text, href, images, className = '', withBord
           {renderImage((images as ImageProps))}
           <span className="ml-1.5 leading-tight">{text}</span>
         </div>
+      )
+
+    case 'text-link':
+      return (
+        <a 
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer" 
+          className="group inline-flex items-center gap-0.5"
+        >
+          <span className="border-b border-gray-300 leading-tight group-hover:border-gray-400">{text}</span>
+          <svg 
+            className="relative h-4 w-4 text-gray-400 transition-all group-hover:translate-x-[3px] group-hover:-translate-y-[3px]"
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2"
+          >
+            <path d="M7 17L17 7" />
+            <path d="M7 7h10v10" />
+          </svg>
+        </a>
       )
 
     default:

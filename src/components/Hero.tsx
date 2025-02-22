@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { LinkText } from './LinkText'
-import { Mail, Github, Instagram } from 'lucide-react'
+import { Mail, Github, Instagram, Music } from 'lucide-react'
 import { useState } from 'react'
 
 export function Hero() {
@@ -100,11 +100,11 @@ export function Hero() {
           </ul>
         </div>
 
-        {/* Social and Music - placeholder icons for now */}
+        {/* Social and Music section */}
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-4">
             <a 
-              href="#" 
+              href="mailto:yb@yashbhrdwaj.com" 
               onClick={handleEmailClick}
               className="group relative text-gray-400 hover:text-gray-600"
             >
@@ -126,7 +126,7 @@ export function Hero() {
                 alt="X (Twitter)" 
                 width={20} 
                 height={20}
-                className="[&>path]:fill-gray-400 hover:[&>path]:fill-gray-600"
+                className="[&>path]:fill-gray-100 hover:[&>path]:fill-gray-600"
               />
             </a>
             <a 
@@ -146,9 +146,32 @@ export function Hero() {
               <Github className="h-5 w-5" />
             </a>
           </div>
-          <button className="flex items-center gap-2 text-gray-400">
-            <span>Listening to Dissolve</span>
-          </button>
+          
+          {/* Divider */}
+          <div className="h-4 w-px bg-gray-200" />
+          
+          {/* Music section */}
+          <div className="group flex items-center gap-2 text-gray-600">
+            <div className="flex items-center gap-2">
+              <div className="overflow-hidden rounded-full">
+                <Image
+                  src="/cd.png"
+                  alt="Album Art"
+                  width={24}
+                  height={24}
+                  className="animate-[spin_3s_linear_infinite_paused] group-hover:animate-[spin_3s_linear_infinite]"
+                />
+              </div>
+              <span className="text-sm">
+                ♪ Listening to{' '}
+                <LinkText
+                  variant="text-link"
+                  text="Dissolve by Absafacto"
+                  href="https://www.youtube.com/watch?v=xe2FPP4lX14"
+                />
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 

@@ -1,0 +1,29 @@
+{
+  "title": "SHIPPING IN PROD",
+  "projects": [
+    {
+      "logo": "/logos/bulkgen.png",
+      "name": "BulkGen",
+      "url": "bulkgen.app",
+      "description": "Generate Figma Designs from Google Sheets"
+    },
+    {
+      "logo": "/logos/pondylife.png",
+      "name": "Pondy Life",
+      "url": "pondy.life",
+      "description": "The best places to go in Pondicherry w your friends"
+    },
+    {
+      "logo": "/logos/checkplug.png",
+      "name": "CheckPlug",
+      "url": "checkplug.com",
+      "description": "Find the next set of travel adapters for your gym"
+    },
+    {
+      "logo": "/logos/darzi.png",
+      "name": "Darzi",
+      "url": "darzi.ai",
+      "description": "AI fashion assistant that's always in your pocket"
+    }
+  ]
+} 
