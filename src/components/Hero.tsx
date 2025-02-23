@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { LinkText } from './LinkText'
-import { Mail, Github, Instagram, Music } from 'lucide-react'
+import { Mail, Github, Instagram } from 'lucide-react'
 import { useState } from 'react'
 
 export function Hero() {
