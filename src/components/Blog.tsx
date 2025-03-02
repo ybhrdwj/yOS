@@ -3,7 +3,7 @@ import blogData from '@/data/blog.json'
 
 export function Blog() {
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 pb-8 md:pb-0">
       <h2 className="text-sm font-medium uppercase text-gray-400">{blogData.title}</h2>
       
       <div className="space-y-4">

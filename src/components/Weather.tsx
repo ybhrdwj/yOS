@@ -31,7 +31,7 @@ const WEATHER_ICONS = {
 export function Weather() {
   const [weather, setWeather] = useState<WeatherData>({ 
     temp: '', 
-    location: 'Mumbai, IN',
+    location: 'Mumbai',
     icon: '01d'
   })
 
@@ -54,7 +54,7 @@ export function Weather() {
         
         setWeather({
           temp: `${Math.round(data.main.temp)}°C`,
-          location: 'Mumbai, IN',
+          location: 'Mumbai',
           icon: data.weather[0].icon
         })
       } catch (error) {
@@ -62,7 +62,7 @@ export function Weather() {
         // Fallback to default values on error
         setWeather({
           temp: '28°C',
-          location: 'Mumbai, IN',
+          location: 'Mumbai',
           icon: '01d'
         })
       }
@@ -81,7 +81,7 @@ export function Weather() {
 
   return (
     <div className="flex items-center gap-2 text-gray-400">
-      <span>{weather.location}</span>
+      <span>{weather.location}<span className="hidden md:inline">, IN</span></span>
       <WeatherIcon className="h-4 w-4" />
       <span>{weather.temp}</span>
     </div>
