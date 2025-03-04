@@ -1,4 +1,6 @@
-export function formatDate(dateStr: string) {
+export function formatDate(dateStr: string | undefined) {
+  if (!dateStr) return '';
+  
   // Handle DD.MM.YY format
   if (dateStr.includes('.')) {
     const [day, month, year] = dateStr.split('.')

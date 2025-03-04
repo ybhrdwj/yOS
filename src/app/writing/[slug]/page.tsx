@@ -5,8 +5,13 @@ import { ChevronLeft } from 'lucide-react'
 import { getPostBySlug } from '@/lib/mdx'
 import { formatDate } from '@/lib/formatDate'
 
-export default async function Post({ params }: { params: { slug: string } }) {
-  const post = await getPostBySlug(params.slug)
+export default async function Post({ 
+  params 
+}: { 
+  params: Promise<{ slug: string }> 
+}) {
+  const { slug } = await params
+  const post = await getPostBySlug(slug)
   
   if (!post) {
     notFound()
@@ -17,7 +22,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
       <div className="mx-auto w-full max-w-[1084px] px-4 sm:px-6 pt-6 sm:pt-[54px]">
         {/* Navigation and Date */}
         <div className="w-full pb-8 sm:pb-[96px]">
-          <div className="grid grid-cols-3 gap-4">
+          <div className="flex justify-between items-center max-w-2xl mx-auto">
             <Link 
               href="/" 
               className="flex items-center gap-1 text-sm text-gray-400 hover:text-gray-600"
@@ -25,10 +30,9 @@ export default async function Post({ params }: { params: { slug: string } }) {
               <ChevronLeft className="h-4 w-4" />
               Writing
             </Link>
-            <time className="text-left sm:text-center text-sm text-gray-400">
+            <time className="text-sm text-gray-400">
               {formatDate(post.date)}
             </time>
-            <div />
           </div>
         </div>
 
