@@ -13,6 +13,13 @@ type Post = {
   content: string
 }
 
+function parseDateString(dateStr: string): Date {
+  const [day, month, year] = dateStr.split('.')
+  // Convert YY to YYYY
+  const fullYear = parseInt(year) < 50 ? `20${year}` : `19${year}`
+  return new Date(`${fullYear}-${month}-${day}`)
+}
+
 export async function getPostBySlug(slug: string): Promise<Post | null> {
   const realSlug = slug.replace(/\.mdx$/, '')
   const fullPath = path.join(postsDirectory, `${realSlug}.mdx`)
@@ -47,7 +54,11 @@ export async function getAllPosts(): Promise<Post[]> {
   // Filter out null values and sort by date (newest first)
   const posts = postsWithNull
     .filter((post): post is Post => post !== null)
-    .sort((post1, post2) => new Date(post2.date).getTime() - new Date(post1.date).getTime())
+    .sort((post1, post2) => {
+      const date1 = parseDateString(post1.date)
+      const date2 = parseDateString(post2.date)
+      return date2.getTime() - date1.getTime()
+    })
   
   return posts
 } 
