@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 import { MDXRemote } from 'next-mdx-remote/rsc'
+import { ReactElement } from 'react'
 
 const postsDirectory = path.join(process.cwd(), 'src/content/posts')
 
@@ -10,7 +11,7 @@ type Post = {
   title: string
   date: string
   category: string
-  content: string
+  content: ReactElement | string
 }
 
 function parseDateString(dateStr: string): Date {
