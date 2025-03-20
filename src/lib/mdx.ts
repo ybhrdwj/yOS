@@ -25,7 +25,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
       slug: realSlug,
       title: data.title,
       date: data.date,
-      category: data.category,
+      category: data.category || 'Uncategorized', // Default category if not specified
       content: await MDXRemote({
         source: content,
         components: {},
@@ -38,9 +38,16 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 
 export async function getAllPosts(): Promise<Post[]> {
   const slugs = fs.readdirSync(postsDirectory)
-  const posts = slugs
-    .map((slug) => getPostBySlug(slug.replace(/\.mdx$/, '')))
+    .filter(file => file.endsWith('.mdx'))
+    .map(file => file.replace(/\.mdx$/, ''))
+  
+  const postsPromises = slugs.map(slug => getPostBySlug(slug))
+  const postsWithNull = await Promise.all(postsPromises)
+  
+  // Filter out null values and sort by date (newest first)
+  const posts = postsWithNull
     .filter((post): post is Post => post !== null)
-    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
+    .sort((post1, post2) => new Date(post2.date).getTime() - new Date(post1.date).getTime())
+  
   return posts
 } 

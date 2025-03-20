@@ -1,14 +1,16 @@
 import Link from 'next/link'
-import blogData from '@/data/blog.json'
+import { getAllPosts } from '@/lib/mdx'
 
-export function Blog() {
+export async function Blog() {
+  const posts = await getAllPosts()
+  
   return (
     <div className="space-y-4 pb-8 md:pb-0">
-      <h2 className="text-sm font-medium uppercase text-gray-400">{blogData.title}</h2>
+      <h2 className="text-sm font-medium uppercase text-gray-400">WRITING</h2>
       
       <div className="space-y-4">
-        {blogData.posts.map((post, index) => (
-          <div key={index} className="group">
+        {posts.map((post) => (
+          <div key={post.slug} className="group">
             <Link 
               href={`/writing/${post.slug}`}
               className="grid grid-cols-[80px_1fr] items-baseline"
