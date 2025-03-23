@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google'
 import { Header } from '@/components/Header'
+import { PostHogProvider } from '@/components/PostHogProvider'
 import './globals.css'
 import { Metadata } from 'next'
 
@@ -54,10 +55,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} font-sans antialiased`}>
       <body className="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-50">
-        <Header />
-        <main>
-          {children}
-        </main>
+        <PostHogProvider>
+          <Header />
+          <main>
+            {children}
+          </main>
+        </PostHogProvider>
       </body>
     </html>
   )
