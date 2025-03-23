@@ -60,9 +60,23 @@ export default async function Post({
               />
               <span className="text-sm text-gray-600">by Yash Bhardwaj</span>
             </div>
-            <button className="rounded-full border border-gray-200 px-4 py-1 text-sm text-gray-400 hover:border-gray-400 hover:text-gray-600">
+            <a 
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                `Just finished reading — ${post.title} by @ybhrdwj\n\nhttps://yashbhardwaj.com/writing/${slug}`
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 rounded-full border border-gray-200 px-4 py-1 text-sm text-gray-400 hover:border-gray-400 hover:text-gray-600"
+            >
+              <Image 
+                src="/x.svg" 
+                alt="Share on X (Twitter)" 
+                width={14} 
+                height={14}
+                className="opacity-60 group-hover:opacity-100"
+              />
               Share
-            </button>
+            </a>
           </div>
 
           {/* Divider */}
