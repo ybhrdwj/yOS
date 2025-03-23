@@ -11,19 +11,69 @@
       "logo": "/logos/pondylife.png",
       "name": "Pondy Life",
       "url": "pondy.life",
-      "description": "The best places to go in Pondicherry w your friends"
+      "description": "The best places to go in Pondicherry"
     },
     {
       "logo": "/logos/checkplug.png",
       "name": "CheckPlug",
       "url": "checkplug.com",
-      "description": "Find the next set of travel adapters for your gym"
+      "description": "Find which travel adapters you need before you leave"
     },
     {
       "logo": "/logos/darzi.png",
       "name": "Darzi",
       "url": "darzi.ai",
       "description": "AI fashion assistant that's always in your pocket"
+    },
+    {
+      "logo": "/logos/slacklash.png",
+      "name": "Slacklash",
+      "url": "slacklash.com",
+      "description": "A fun game about leaking company secrets"
     }
+    ,
+    {
+      "logo": "/logos/dosalist.png",
+      "name": "DosaList",
+      "url": "dosalist.com", 
+      "description": "CoinMarketCap for Dosa places in BLR"
+    },
+    {
+      "logo": "/logos/whichsideis.png",
+      "name": "Which Side Is?",
+      "url": "whichsideis.com",
+      "description": "Find which side a monument will be on your flight"
+    },
+    {
+      "logo": "/logos/scnz.png", 
+      "name": "SCNZ",
+      "url": "scnz.in",
+      "description": "Curated Lists of things to do in your city"
+    },
+    {
+      "logo": "/logos/unrot.png",
+      "name": "Unrot",
+      "url": "unrot.app",
+      "description": "An phyiscal brick to block your social media"
+    },
+    {
+      "logo": "/logos/uxmarket.png",
+      "name": "UX Market",
+      "url": "ux.market",
+      "description": "A marketplace for the world's best UI components"
+    },
+    {
+      "logo": "/logos/thumbnailmarket.png",
+      "name": "Thumbnail Market",
+      "url": "thumbnail.market",
+      "description": "A marketplace to buy high CTR thumbnails"
+    },
+    {
+      "logo": "/logos/shitposting.png",
+      "name": "Shitposting.lol",
+      "url": "shitposting.lol",
+      "description": "Monthly subscription of shitposts for your business"
+    }
+
   ]
 } 
