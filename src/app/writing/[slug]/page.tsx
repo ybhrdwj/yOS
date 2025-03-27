@@ -6,14 +6,11 @@ import { getPostBySlug } from '@/lib/mdx'
 import { formatDate } from '@/lib/formatDate'
 import { Metadata } from 'next'
 
-type Props = {
-  params: { slug: string }
-  searchParams?: { [key: string]: string | string[] | undefined }
-}
-
-export async function generateMetadata(
-  { params }: Props
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
   const post = await getPostBySlug(params.slug)
   
   if (!post) {
@@ -64,7 +61,9 @@ export async function generateMetadata(
 
 export default async function Post({
   params,
-}: Props) {
+}: {
+  params: { slug: string };
+}) {
   const post = await getPostBySlug(params.slug)
   
   if (!post) {

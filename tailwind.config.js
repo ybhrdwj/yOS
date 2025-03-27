@@ -36,5 +36,4 @@ module.exports = {
       },
     },
   },
-  darkMode: false,
 } 
