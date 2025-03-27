@@ -1,6 +1,23 @@
 import Link from 'next/link'
 import { ChevronLeft } from 'lucide-react'
 import { getAllPosts } from '@/lib/mdx'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Writing | Yash Bhardwaj',
+  description: 'Thoughts on technology, business, and life',
+  openGraph: {
+    title: 'Writing | Yash Bhardwaj',
+    description: 'Thoughts on technology, business, and life',
+    images: ['/api/og'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Writing | Yash Bhardwaj',
+    description: 'Thoughts on technology, business, and life',
+    images: ['/api/og'],
+  },
+}
 
 export default async function WritingPage() {
   const posts = await getAllPosts()

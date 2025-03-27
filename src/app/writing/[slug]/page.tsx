@@ -4,6 +4,61 @@ import { notFound } from 'next/navigation'
 import { ChevronLeft } from 'lucide-react'
 import { getPostBySlug } from '@/lib/mdx'
 import { formatDate } from '@/lib/formatDate'
+import { Metadata } from 'next'
+
+type Props = {
+  params: Promise<{ slug: string }> | { slug: string }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const resolvedParams = await params
+  const post = await getPostBySlug(resolvedParams.slug)
+  
+  if (!post) {
+    return {
+      title: 'Post Not Found | Yash Bhardwaj',
+      description: 'The requested post could not be found.',
+    }
+  }
+
+  const ogUrl = `/api/og?slug=${resolvedParams.slug}&title=${encodeURIComponent(post.title)}&category=${encodeURIComponent(post.category)}&date=${encodeURIComponent(post.date)}`
+
+  return {
+    title: `${post.title} | Yash Bhardwaj`,
+    description: post.description || post.title,
+    openGraph: {
+      type: 'article',
+      title: post.title,
+      description: post.description || post.title,
+      url: `https://yashbhardwaj.com/writing/${resolvedParams.slug}`,
+      images: [
+        {
+          url: ogUrl,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        }
+      ],
+      siteName: 'Yash Bhardwaj',
+      publishedTime: post.date,
+      authors: ['Yash Bhardwaj'],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description || post.title,
+      creator: '@ybhrdwj',
+      images: [
+        {
+          url: ogUrl,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        }
+      ],
+    },
+  }
+}
 
 export default async function Post({ 
   params 
