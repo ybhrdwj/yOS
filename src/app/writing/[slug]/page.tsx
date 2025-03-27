@@ -6,11 +6,12 @@ import { getPostBySlug } from '@/lib/mdx'
 import { formatDate } from '@/lib/formatDate'
 import { Metadata } from 'next'
 
-type Props = {
+interface PageProps {
   params: { slug: string }
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const post = await getPostBySlug(params.slug)
   
   if (!post) {
@@ -59,7 +60,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function Post({ params }: Props) {
+export default async function Post({ params }: PageProps) {
   const post = await getPostBySlug(params.slug)
   
   if (!post) {
