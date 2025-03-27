@@ -7,12 +7,11 @@ import { formatDate } from '@/lib/formatDate'
 import { Metadata } from 'next'
 
 type Props = {
-  params: Promise<{ slug: string }> | { slug: string }
+  params: { slug: string }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const resolvedParams = await params
-  const post = await getPostBySlug(resolvedParams.slug)
+  const post = await getPostBySlug(params.slug)
   
   if (!post) {
     return {
@@ -21,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
-  const ogUrl = `/api/og?slug=${resolvedParams.slug}&title=${encodeURIComponent(post.title)}&category=${encodeURIComponent(post.category)}&date=${encodeURIComponent(post.date)}`
+  const ogUrl = `/api/og?slug=${params.slug}&title=${encodeURIComponent(post.title)}&category=${encodeURIComponent(post.category)}&date=${encodeURIComponent(post.date)}`
 
   return {
     title: `${post.title} | Yash Bhardwaj`,
@@ -30,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'article',
       title: post.title,
       description: post.description || post.title,
-      url: `https://yashbhardwaj.com/writing/${resolvedParams.slug}`,
+      url: `https://yashbhardwaj.com/writing/${params.slug}`,
       images: [
         {
           url: ogUrl,
@@ -60,13 +59,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function Post({ 
-  params 
-}: { 
-  params: Promise<{ slug: string }> 
-}) {
-  const { slug } = await params
-  const post = await getPostBySlug(slug)
+export default async function Post({ params }: Props) {
+  const post = await getPostBySlug(params.slug)
   
   if (!post) {
     notFound()
@@ -117,7 +111,7 @@ export default async function Post({
             </div>
             <a 
               href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-                `Just finished reading — ${post.title} by @ybhrdwj\n\nhttps://yashbhardwaj.com/writing/${slug}`
+                `Just finished reading — ${post.title} by @ybhrdwj\n\nhttps://yashbhardwaj.com/writing/${params.slug}`
               )}`}
               target="_blank"
               rel="noopener noreferrer"
