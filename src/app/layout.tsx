@@ -54,7 +54,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} font-sans antialiased`}>
-      <body className="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-50">
+      <body className="bg-gray-50 text-gray-900">
         <PostHogProvider>
           <Header />
           <main>

@@ -36,5 +36,5 @@ module.exports = {
       },
     },
   },
-  darkMode: 'media', // or 'class' if you want manual control
+  darkMode: false,
 } 

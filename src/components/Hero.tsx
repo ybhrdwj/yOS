@@ -26,7 +26,7 @@ export function Hero() {
         <div className="flex flex-row gap-4 items-start">
           {/* Welcome paragraph - 75% width */}
           <div className="w-3/4">
-            <p className="text-base text-gray-600 dark:text-gray-400">
+            <p className="text-base text-gray-600">
               Hello! I&apos;m Yash and you&apos;re currently exploring my tiny 
               corner of the internet. I use this space to project my ideas 
               and express my obsessions.
@@ -50,7 +50,7 @@ export function Hero() {
           {/* Summary section */}
           <div className="space-y-4">
             <h2 className="text-sm font-medium uppercase text-gray-400">Summary</h2>
-            <ul className="list-disc space-y-2 pl-4 text-gray-600 dark:text-gray-400 [&>li::marker]:text-gray-300">
+            <ul className="list-disc space-y-2 pl-4 text-gray-600 [&>li::marker]:text-gray-300">
               <li>
                 Currently I&apos;m moving rectangles at{' '}
                 <LinkText
@@ -200,7 +200,7 @@ export function Hero() {
       {/* Desktop layout - Main content - 7 columns */}
       <div className="hidden md:block md:col-span-7 space-y-12">
         {/* Welcome paragraph */}
-        <p className="text-base text-gray-600 dark:text-gray-400">
+        <p className="text-base text-gray-600">
           Hello! I&apos;m Yash and you&apos;re currently exploring my tiny <br />
           corner of the internet. I use this space to project my ideas <br />
           and express my obsessions.
@@ -209,7 +209,7 @@ export function Hero() {
         {/* Summary section */}
         <div className="space-y-4">
           <h2 className="text-sm font-medium uppercase text-gray-400">Summary</h2>
-          <ul className="list-disc space-y-2 pl-4 text-gray-600 dark:text-gray-400 [&>li::marker]:text-gray-300">
+          <ul className="list-disc space-y-2 pl-4 text-gray-600 [&>li::marker]:text-gray-300">
             <li>
               Currently I&apos;m moving rectangles at{' '}
               <LinkText
