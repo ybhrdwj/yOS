@@ -10,7 +10,7 @@ export function Hero() {
 
   const handleEmailClick = (e: React.MouseEvent) => {
     e.preventDefault()
-    navigator.clipboard.writeText('yb@yashbhrdwaj.com')
+    navigator.clipboard.writeText('yb@yashbhardwaj.com')
     setShowCopied(true)
     setTimeout(() => setShowCopied(false), 2000)
   }
@@ -122,7 +122,7 @@ export function Hero() {
           <div className="flex flex-col gap-6">
             <div className="flex items-center gap-4 w-full">
               <a 
-                href="mailto:yb@yashbhrdwaj.com" 
+                href="mailto:yb@yashbhardwaj.com" 
                 onClick={handleEmailClick}
                 className="group relative text-gray-400 hover:text-gray-600"
               >
@@ -281,7 +281,7 @@ export function Hero() {
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-4">
             <a 
-              href="mailto:yb@yashbhrdwaj.com" 
+              href="mailto:yb@yashbhardwaj.com" 
               onClick={handleEmailClick}
               className="group relative text-gray-400 hover:text-gray-600"
             >
