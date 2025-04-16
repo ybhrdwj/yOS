@@ -9,7 +9,7 @@ export async function Blog() {
       <h2 className="text-sm font-medium uppercase text-gray-400">WRITING</h2>
       
       <div className="space-y-4">
-        {posts.map((post) => (
+        {posts.slice(0, 8).map((post) => (
           <div key={post.slug} className="group">
             <Link 
               href={`/writing/${post.slug}`}
