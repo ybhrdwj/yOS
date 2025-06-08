@@ -8,7 +8,10 @@ export function Clock() {
 
   useEffect(() => {
     const updateTime = () => {
-      const now = new Date()
+      // Force the time to Asia/Kolkata (Mumbai) regardless of user timezone
+      const now = new Date(
+        new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })
+      )
       const hours = now.getHours() % 12 || 12
       const minutes = now.getMinutes().toString().padStart(2, '0')
       const meridiem = now.getHours() >= 12 ? 'PM' : 'AM'
