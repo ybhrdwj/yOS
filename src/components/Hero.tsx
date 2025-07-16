@@ -52,7 +52,25 @@ export function Hero() {
             <h2 className="text-sm font-medium uppercase text-gray-400">Summary</h2>
             <ul className="list-disc space-y-2 pl-4 text-gray-600 [&>li::marker]:text-gray-300">
               <li>
-                Currently I&apos;m moving rectangles at{' '}
+                Currently I&apos;m working on my{' '}
+                <LinkText
+                  variant="text-link"
+                  text="ideas"
+                  href="/projects"
+                />
+                {' '}
+                <LinkText
+                  variant="image-stack"
+                  text=""
+                  images={[
+                    { src: "/logos/bulkgen.png", alt: "BulkGen" },
+                    { src: "/logos/pondylife.png", alt: "Pondy Life" },
+                    { src: "/logos/checkplug.png", alt: "CheckPlug" },
+                  ]}
+                />
+              </li>
+              <li>
+                Previously I was designing at{' '}
                 <LinkText
                   variant="single-image-link"
                   text="Solana"
@@ -60,22 +78,12 @@ export function Hero() {
                   images={{ src: "/logos/solana.png", alt: "Solana" }}
                   withBorder
                 />
-              </li>
-              <li>
-                Previously I was designing for{' '}
-                <LinkText
-                  variant="single-image-link"
-                  text="Balaji"
-                  href="https://x.com/balajis"
-                  images={{ src: "/logos/balaji.png", alt: "Balaji" }}
-                  withBorder
-                />
                 {' '}&{' '}
                 <LinkText
                   variant="single-image-link"
-                  text="Network State"
-                  href="https://ns.com"
-                  images={{ src: "/logos/ns.png", alt: "Network State" }}
+                  text="Balaji S"
+                  href="https://x.com/balajis"
+                  images={{ src: "/logos/balaji.png", alt: "Balaji" }}
                   withBorder
                 />
               </li>
@@ -211,7 +219,25 @@ export function Hero() {
           <h2 className="text-sm font-medium uppercase text-gray-400">Summary</h2>
           <ul className="list-disc space-y-2 pl-4 text-gray-600 [&>li::marker]:text-gray-300">
             <li>
-              Currently I&apos;m moving rectangles at{' '}
+              Currently I&apos;m working on my{' '}
+              <LinkText
+                variant="text-link"
+                text="ideas"
+                href="/projects"
+              />
+              {' '}
+              <LinkText
+                variant="image-stack"
+                text=""
+                images={[
+                  { src: "/logos/bulkgen.png", alt: "BulkGen" },
+                  { src: "/logos/pondylife.png", alt: "Pondy Life" },
+                  { src: "/logos/checkplug.png", alt: "CheckPlug" },
+                ]}
+              />
+            </li>
+            <li>
+              Previously I was designing at{' '}
               <LinkText
                 variant="single-image-link"
                 text="Solana"
@@ -219,22 +245,12 @@ export function Hero() {
                 images={{ src: "/logos/solana.png", alt: "Solana" }}
                 withBorder
               />
-            </li>
-            <li>
-              Previously I was designing for{' '}
-              <LinkText
-                variant="single-image-link"
-                text="Balaji"
-                href="https://x.com/balajis"
-                images={{ src: "/logos/balaji.png", alt: "Balaji" }}
-                withBorder
-              />
               {' '}&{' '}
               <LinkText
                 variant="single-image-link"
-                text="Network State"
-                href="https://ns.com"
-                images={{ src: "/logos/ns.png", alt: "Network State" }}
+                text="Balaji S"
+                href="https://x.com/balajis"
+                images={{ src: "/logos/balaji.png", alt: "Balaji" }}
                 withBorder
               />
             </li>

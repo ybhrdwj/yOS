@@ -10,7 +10,7 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-gray-50/75 backdrop-blur">
+    <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white">
       {/* Main header container */}
       <div className="mx-auto w-full max-w-[1084px]">
         <div className="md:grid md:grid-cols-12 md:gap-5">
@@ -66,7 +66,7 @@ export function Header() {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-gray-50 border-b border-gray-200">
+        <div className="md:hidden bg-white border-b border-gray-200">
           <div className="mx-auto w-full max-w-[1084px]">
             <div className="md:grid md:grid-cols-12 md:gap-5">
               <div className="hidden md:block md:col-span-1" />

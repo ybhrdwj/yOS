@@ -11,10 +11,10 @@
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
-    "@next/mdx": "^15.1.7",
+    "@next/mdx": "^15.4.1",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.475.0",
-    "next": "15.1.7",
+    "next": "^15.4.1",
     "next-mdx-remote": "^5.0.0",
     "posthog-js": "^1.232.4",
     "posthog-node": "^4.10.1",
@@ -28,7 +28,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.1.7",
+    "eslint-config-next": "^15.4.1",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
