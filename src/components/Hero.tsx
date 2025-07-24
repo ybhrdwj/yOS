@@ -102,7 +102,7 @@ export function Hero() {
                   ]}
                 />
               </li>
-              <li>25 years old, based in Bombay</li>
+              <li>27 years old, based in Bombay</li>
               <li>
                 I built the first meme page network in India to 16M followers{' '}
                 <LinkText
