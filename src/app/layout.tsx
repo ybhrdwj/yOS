@@ -21,7 +21,6 @@ export const metadata: Metadata = {
     shortcut: '/favicon-16x16.png?v=1',
   },
   manifest: '/site.webmanifest',
-  themeColor: '#000000',
   openGraph: {
     type: 'website',
     url: 'https://yashbhardwaj.com',
@@ -37,14 +36,16 @@ export const metadata: Metadata = {
     images: ["https://yashbhardwaj.com/og-image.png"],
     creator: '@ybhrdwj',
   },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-  },
   robots: {
     index: true,
     follow: true,
   },
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#000000',
 };
 
 export default function RootLayout({

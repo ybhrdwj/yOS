@@ -1,8 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { MDXRemote } from 'next-mdx-remote/rsc'
-import { ReactElement } from 'react'
+import { ReactNode } from 'react'
 
 const postsDirectory = path.join(process.cwd(), 'src/content/posts')
 
@@ -11,7 +10,7 @@ type Post = {
   title: string
   date: string
   category: string
-  content: ReactElement | string
+  content: string
   description?: string
 }
 
@@ -34,12 +33,9 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
       slug: realSlug,
       title: data.title,
       date: data.date,
-      category: data.category || 'Uncategorized', // Default category if not specified
-      description: data.description || data.title, // Use description from frontmatter or fallback to title
-      content: await MDXRemote({
-        source: content,
-        components: {},
-      })
+      category: data.category || 'Uncategorized',
+      description: data.description || data.title,
+      content: content // Return raw markdown content for now
     }
   } catch {
     return null

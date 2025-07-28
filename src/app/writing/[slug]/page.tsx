@@ -4,14 +4,16 @@ import { notFound } from 'next/navigation'
 import { ChevronLeft } from 'lucide-react'
 import { getPostBySlug } from '@/lib/mdx'
 import { formatDate } from '@/lib/formatDate'
+import { MDXContent } from '@/components/MDXContent'
 import { Metadata } from 'next'
 
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const post = await getPostBySlug(params.slug)
+  const { slug } = await params;
+  const post = await getPostBySlug(slug)
   
   if (!post) {
     return {
@@ -20,7 +22,7 @@ export async function generateMetadata({
     }
   }
 
-  const ogUrl = `/api/og?slug=${params.slug}&title=${encodeURIComponent(post.title)}&category=${encodeURIComponent(post.category)}&date=${encodeURIComponent(post.date)}`
+  const ogUrl = `/api/og?slug=${slug}&title=${encodeURIComponent(post.title)}&category=${encodeURIComponent(post.category)}&date=${encodeURIComponent(post.date)}`
 
   return {
     title: `${post.title} | Yash Bhardwaj`,
@@ -29,7 +31,7 @@ export async function generateMetadata({
       type: 'article',
       title: post.title,
       description: post.description || post.title,
-      url: `https://yashbhardwaj.com/writing/${params.slug}`,
+      url: `https://yashbhardwaj.com/writing/${slug}`,
       images: [
         {
           url: ogUrl,
@@ -62,9 +64,10 @@ export async function generateMetadata({
 export default async function Post({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const post = await getPostBySlug(params.slug)
+  const { slug } = await params;
+  const post = await getPostBySlug(slug)
   
   if (!post) {
     notFound()
@@ -115,7 +118,7 @@ export default async function Post({
             </div>
             <a 
               href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-                `Just finished reading — ${post.title} by @ybhrdwj\n\nhttps://yashbhardwaj.com/writing/${params.slug}`
+                `Just finished reading — ${post.title} by @ybhrdwj\n\nhttps://yashbhardwaj.com/writing/${slug}`
               )}`}
               target="_blank"
               rel="noopener noreferrer"
@@ -136,21 +139,8 @@ export default async function Post({
           <div className="mb-8 h-px w-full bg-gray-200" />
 
           {/* Content */}
-          <div className="prose prose-gray w-full overflow-x-auto space-y-6 text-gray-600
-            prose-p:text-[16px] prose-p:leading-[28px]
-            prose-headings:text-gray-900
-            prose-ol:pl-0 prose-ol:my-6 prose-ol:list-decimal
-            prose-ol:text-[16px] prose-ol:leading-[28px]
-            [&_ol]:list-decimal 
-            [&_ol>li]:pl-2 [&_ol>li]:ml-4 [&_ol>li]:mb-2
-            [&_ol>li::marker]:text-gray-600
-            prose-strong:font-medium prose-strong:text-gray-900
-            prose-pre:overflow-x-auto prose-pre:max-w-full
-            prose-img:max-w-full
-            prose-table:overflow-x-auto prose-table:max-w-full
-            prose-code:break-words"
-          >
-            {post.content}
+          <div>
+            <MDXContent content={post.content} />
           </div>
         </article>
       </div>
