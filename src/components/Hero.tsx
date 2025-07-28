@@ -3,10 +3,12 @@
 import Image from 'next/image'
 import { LinkText } from './LinkText'
 import { Mail, Github, Instagram } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export function Hero() {
   const [showCopied, setShowCopied] = useState(false)
+  const [decimalAge, setDecimalAge] = useState(0)
+  const [isHovering, setIsHovering] = useState(false)
 
   const handleEmailClick = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -14,6 +16,37 @@ export function Hero() {
     setShowCopied(true)
     setTimeout(() => setShowCopied(false), 2000)
   }
+
+  const birthDate = new Date('1998-08-19')
+
+  useEffect(() => {
+    const calculateAge = () => {
+      const today = new Date()
+      let age = today.getFullYear() - birthDate.getFullYear()
+      const m = today.getMonth() - birthDate.getMonth()
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--
+      }
+      return age
+    }
+
+    const calculateDecimalAge = () => {
+      const birthTime = new Date('1998-08-19T00:00:00').getTime()
+      const currentTime = new Date().getTime()
+      const ageInMilliseconds = currentTime - birthTime
+      const ageInYears = ageInMilliseconds / (1000 * 60 * 60 * 24 * 365.25)
+      setDecimalAge(ageInYears)
+    }
+
+    if (isHovering) {
+      const interval = setInterval(calculateDecimalAge, 100)
+      return () => clearInterval(interval)
+    } else {
+      setDecimalAge(calculateAge())
+    }
+  }, [isHovering])
+
+  const age = Math.floor(decimalAge)
 
   return (
     <div className="mx-auto w-full max-w-[1084px] px-4 py-8 md:grid md:grid-cols-12 md:gap-5 md:px-0 md:py-16">
@@ -102,7 +135,21 @@ export function Hero() {
                   ]}
                 />
               </li>
-              <li>25 years old, based in Bombay</li>
+              <li>
+                <span
+                  className="relative"
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={() => setIsHovering(false)}
+                >
+                  {age}
+                  {isHovering && (
+                    <div className="absolute bottom-full left-1/2 mb-2 -translate-x-1/2 transform whitespace-nowrap rounded-full bg-gray-900 px-3 py-1 text-sm text-white shadow-lg">
+                      {decimalAge.toFixed(9)}
+                    </div>
+                  )}
+                </span>{' '}
+                years old, based in Bombay
+              </li>
               <li>
                 I built the first meme page network in India to 16M followers{' '}
                 <LinkText
@@ -269,7 +316,21 @@ export function Hero() {
                 ]}
               />
             </li>
-            <li>25 years old, based in Bombay</li>
+            <li>
+              <span
+                className="relative"
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
+              >
+                {age}
+                {isHovering && (
+                  <div className="absolute bottom-full left-1/2 mb-2 -translate-x-1/2 transform whitespace-nowrap rounded-full bg-gray-900 px-3 py-1 text-sm text-white shadow-lg">
+                    {decimalAge.toFixed(9)}
+                  </div>
+                )}
+              </span>{' '}
+              years old, based in Bombay
+            </li>
             <li>
               I built the first meme page network in India to 16M followers{' '}
               <LinkText

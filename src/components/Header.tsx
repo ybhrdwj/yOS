@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Clock } from './Clock'
 import { Weather } from './Weather'
 import { useState } from 'react'
@@ -8,6 +9,9 @@ import { Menu, X } from 'lucide-react'
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
+  
+  const isActive = (path: string) => pathname.startsWith(path)
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white">
@@ -28,14 +32,29 @@ export function Header() {
             <div className="flex items-center">
               {/* Desktop Navigation */}
               <nav className="hidden md:flex items-center gap-6 mr-6">
-                <Link href="/writing" className="text-sm text-gray-500 hover:text-gray-900">
+                <Link 
+                  href="/writing" 
+                  className={`text-sm hover:text-gray-900 ${
+                    isActive('/writing') ? 'text-gray-900' : 'text-gray-500'
+                  }`}
+                >
                   writing
                 </Link>
-                <Link href="/projects" className="text-sm text-gray-500 hover:text-gray-900">
+                <Link 
+                  href="/projects" 
+                  className={`text-sm hover:text-gray-900 ${
+                    isActive('/projects') ? 'text-gray-900' : 'text-gray-500'
+                  }`}
+                >
                   projects
                 </Link>
-                <Link href="/api" className="text-sm text-gray-500 hover:text-gray-900">
-                  api
+                <Link 
+                  href="/values" 
+                  className={`text-sm hover:text-gray-900 ${
+                    isActive('/values') ? 'text-gray-900' : 'text-gray-500'
+                  }`}
+                >
+                  values
                 </Link>
               </nav>
 
@@ -73,24 +92,30 @@ export function Header() {
               <nav className="col-span-10 px-4 py-4 flex flex-col space-y-4">
                 <Link 
                   href="/writing" 
-                  className="text-sm text-gray-500 hover:text-gray-900"
+                  className={`text-sm hover:text-gray-900 ${
+                    isActive('/writing') ? 'text-gray-900' : 'text-gray-500'
+                  }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   writing
                 </Link>
                 <Link 
                   href="/projects" 
-                  className="text-sm text-gray-500 hover:text-gray-900"
+                  className={`text-sm hover:text-gray-900 ${
+                    isActive('/projects') ? 'text-gray-900' : 'text-gray-500'
+                  }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   projects
                 </Link>
                 <Link 
-                  href="/api" 
-                  className="text-sm text-gray-500 hover:text-gray-900"
+                  href="/values" 
+                  className={`text-sm hover:text-gray-900 ${
+                    isActive('/values') ? 'text-gray-900' : 'text-gray-500'
+                  }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  api
+                  values
                 </Link>
               </nav>
               <div className="hidden md:block md:col-span-1" />
