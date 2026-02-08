@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  // Specify the correct root directory to avoid lockfile warnings
+  outputFileTracingRoot: __dirname,
   async rewrites() {
     return [
       {

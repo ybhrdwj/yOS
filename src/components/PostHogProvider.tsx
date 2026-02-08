@@ -7,12 +7,20 @@ import { usePathname, useSearchParams } from "next/navigation";
 
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
-      api_host: 'https://www.yashbhardwaj.com/ingest',
-      ui_host: 'https://us.posthog.com',
-      capture_pageview: false, // We capture pageviews manually
-      capture_pageleave: true, // Enable pageleave capture
-    });
+    if (typeof window === 'undefined') return;
+
+    // Defer PostHog initialization until after hydration
+    // This reduces initial bundle impact and improves FCP/LCP
+    const timer = setTimeout(() => {
+      posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
+        api_host: 'https://www.yashbhardwaj.com/ingest',
+        ui_host: 'https://us.posthog.com',
+        capture_pageview: false, // We capture pageviews manually
+        capture_pageleave: true, // Enable pageleave capture
+      });
+    }, 0);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (

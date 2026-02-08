@@ -84,14 +84,14 @@ export function Header() {
       </div>
 
       {/* Mobile Menu Dropdown */}
-      {mobileMenuOpen && (
+      {mobileMenuOpen ? (
         <div className="md:hidden bg-white border-b border-gray-200">
           <div className="mx-auto w-full max-w-[1084px]">
             <div className="md:grid md:grid-cols-12 md:gap-5">
               <div className="hidden md:block md:col-span-1" />
               <nav className="col-span-10 px-4 py-4 flex flex-col space-y-4">
-                <Link 
-                  href="/writing" 
+                <Link
+                  href="/writing"
                   className={`text-sm hover:text-gray-900 ${
                     isActive('/writing') ? 'text-gray-900' : 'text-gray-500'
                   }`}
@@ -99,8 +99,8 @@ export function Header() {
                 >
                   writing
                 </Link>
-                <Link 
-                  href="/projects" 
+                <Link
+                  href="/projects"
                   className={`text-sm hover:text-gray-900 ${
                     isActive('/projects') ? 'text-gray-900' : 'text-gray-500'
                   }`}
@@ -108,8 +108,8 @@ export function Header() {
                 >
                   projects
                 </Link>
-                <Link 
-                  href="/values" 
+                <Link
+                  href="/values"
                   className={`text-sm hover:text-gray-900 ${
                     isActive('/values') ? 'text-gray-900' : 'text-gray-500'
                   }`}
@@ -122,7 +122,7 @@ export function Header() {
             </div>
           </div>
         </div>
-      )}
+      ) : null}
     </header>
   )
 } 

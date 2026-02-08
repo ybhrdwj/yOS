@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { LinkText } from './LinkText'
 import { Mail, Github, Instagram } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 
 export function Hero() {
   const [showCopied, setShowCopied] = useState(false)
@@ -17,34 +17,34 @@ export function Hero() {
     setTimeout(() => setShowCopied(false), 2000)
   }
 
-  const birthDate = new Date('1998-08-19')
+  // Memoize birth timestamp to avoid recalculating
+  const birthTime = useMemo(() => new Date('1998-08-19T00:00:00').getTime(), [])
 
   useEffect(() => {
-    const calculateAge = () => {
+    if (!isHovering) {
+      // Calculate simple integer age once when not hovering
       const today = new Date()
-      let age = today.getFullYear() - birthDate.getFullYear()
-      const m = today.getMonth() - birthDate.getMonth()
-      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      let age = today.getFullYear() - 1998
+      const m = today.getMonth() - 7 // August = month 7 (0-indexed)
+      if (m < 0 || (m === 0 && today.getDate() < 19)) {
         age--
       }
-      return age
+      setDecimalAge(age)
+      return
     }
 
+    // When hovering, calculate and update decimal age
     const calculateDecimalAge = () => {
-      const birthTime = new Date('1998-08-19T00:00:00').getTime()
-      const currentTime = new Date().getTime()
+      const currentTime = Date.now()
       const ageInMilliseconds = currentTime - birthTime
       const ageInYears = ageInMilliseconds / (1000 * 60 * 60 * 24 * 365.25)
       setDecimalAge(ageInYears)
     }
 
-    if (isHovering) {
-      const interval = setInterval(calculateDecimalAge, 100)
-      return () => clearInterval(interval)
-    } else {
-      setDecimalAge(calculateAge())
-    }
-  }, [isHovering])
+    calculateDecimalAge()
+    const interval = setInterval(calculateDecimalAge, 100)
+    return () => clearInterval(interval)
+  }, [isHovering, birthTime])
 
   const age = Math.floor(decimalAge)
 
@@ -142,11 +142,11 @@ export function Hero() {
                   onMouseLeave={() => setIsHovering(false)}
                 >
                   {age}
-                  {isHovering && (
+                  {isHovering ? (
                     <div className="absolute bottom-full left-1/2 mb-2 -translate-x-1/2 transform whitespace-nowrap rounded-full bg-gray-900 px-3 py-1 text-sm text-white shadow-lg">
                       {decimalAge.toFixed(9)}
                     </div>
-                  )}
+                  ) : null}
                 </span>{' '}
                 years old, based in Bombay
               </li>
@@ -363,11 +363,11 @@ export function Hero() {
               className="group relative text-gray-400 hover:text-gray-600"
             >
               <Mail className="h-5 w-5" />
-              {showCopied && (
+              {showCopied ? (
                 <div className="absolute bottom-full left-1/2 mb-1 -translate-x-1/2 transform whitespace-nowrap rounded-full bg-gray-900 px-2 py-0.5 text-xs text-white">
                   Copied
                 </div>
-              )}
+              ) : null}
             </a>
             <a 
               href="https://x.com/ybhrdwj" 

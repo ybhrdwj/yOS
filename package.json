@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "packageManager": "pnpm@10.28.1",
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
@@ -19,7 +20,8 @@
     "posthog-js": "^1.232.4",
     "posthog-node": "^4.10.1",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "swr": "^2.4.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

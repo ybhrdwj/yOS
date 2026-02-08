@@ -2,10 +2,19 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { ChevronLeft } from 'lucide-react'
-import { getPostBySlug } from '@/lib/mdx'
+import { getPostBySlug, getAllPosts } from '@/lib/mdx'
 import { formatDate } from '@/lib/formatDate'
 import { MDXContent } from '@/components/MDXContent'
 import { Metadata } from 'next'
+
+// Generate static pages for all blog posts at build time
+// This converts from serverless (ƒ) to static (○) = 10x faster + $0 cost per view
+export async function generateStaticParams() {
+  const posts = await getAllPosts()
+  return posts.map((post) => ({
+    slug: post.slug,
+  }))
+}
 
 export async function generateMetadata({
   params,

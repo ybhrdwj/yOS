@@ -1,12 +1,21 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import useSWR from 'swr'
 import { Sun, Cloud, CloudRain, CloudSnow, CloudLightning, Cloudy } from 'lucide-react'
 
 type WeatherData = {
   temp: string
   location: string
   icon: string
+}
+
+type WeatherAPIResponse = {
+  main: {
+    temp: number
+  }
+  weather: Array<{
+    icon: string
+  }>
 }
 
 const WEATHER_ICONS = {
@@ -28,62 +37,53 @@ const WEATHER_ICONS = {
   '13n': CloudSnow,
 } as const
 
-export function Weather() {
-  const [weather, setWeather] = useState<WeatherData>({ 
-    temp: '', 
+// Fetcher function for SWR
+const fetcher = async (): Promise<WeatherData> => {
+  // Mumbai coordinates
+  const lat = 19.0760
+  const lon = 72.8777
+
+  const response = await fetch(
+    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}`
+  )
+
+  if (!response.ok) {
+    throw new Error('Weather data fetch failed')
+  }
+
+  const data: WeatherAPIResponse = await response.json()
+
+  return {
+    temp: `${Math.round(data.main.temp)}°C`,
     location: 'Mumbai',
-    icon: '01d'
-  })
+    icon: data.weather[0].icon
+  }
+}
 
-  useEffect(() => {
-    const fetchWeather = async () => {
-      try {
-        // Mumbai coordinates
-        const lat = 19.0760
-        const lon = 72.8777
-        
-        const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}`
-        )
-
-        if (!response.ok) {
-          throw new Error('Weather data fetch failed')
-        }
-
-        const data = await response.json()
-        
-        setWeather({
-          temp: `${Math.round(data.main.temp)}°C`,
-          location: 'Mumbai',
-          icon: data.weather[0].icon
-        })
-      } catch (error) {
-        console.error('Error fetching weather:', error)
-        // Fallback to default values on error
-        setWeather({
-          temp: '28°C',
-          location: 'Mumbai',
-          icon: '01d'
-        })
+export function Weather() {
+  // Use SWR for automatic deduplication, caching, and revalidation
+  const { data: weather } = useSWR<WeatherData>(
+    'weather-mumbai',
+    fetcher,
+    {
+      refreshInterval: 10 * 60 * 1000, // Revalidate every 10 minutes
+      revalidateOnFocus: false, // Don't refetch on window focus
+      dedupingInterval: 5 * 60 * 1000, // Dedupe requests within 5 minutes
+      fallbackData: {
+        temp: '28°C',
+        location: 'Mumbai',
+        icon: '01d'
       }
     }
+  )
 
-    // Fetch immediately
-    fetchWeather()
-
-    // Then fetch every 10 minutes
-    const interval = setInterval(fetchWeather, 10 * 60 * 1000)
-
-    return () => clearInterval(interval)
-  }, [])
-
-  const WeatherIcon = WEATHER_ICONS[weather.icon as keyof typeof WEATHER_ICONS] || Sun
+  const WeatherIcon = WEATHER_ICONS[weather!.icon as keyof typeof WEATHER_ICONS] || Sun
 
   return (
     <div className="flex items-center gap-2 text-gray-400">
-      <span>{weather.location}<span className="hidden md:inline">, IN</span></span>
+      <span>{weather!.location}<span className="hidden md:inline">, IN</span></span>
       <WeatherIcon className="h-4 w-4" />
-      <span>{weather.temp}</span>
+      <span>{weather!.temp}</span>
     </div>
   )
 } 
