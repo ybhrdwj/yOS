@@ -1,15 +1,20 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: var(--font-inter), 'Inter', sans-serif;
+  --color-background: oklch(1 0 0);
+  --color-foreground: oklch(0.145 0.014 285.82);
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
   --font-inter: 'Inter', sans-serif;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: var(--color-foreground);
+  background: var(--color-background);
   font-family: var(--font-inter);
+  text-wrap: pretty;
+  -webkit-font-smoothing: antialiased;
 }

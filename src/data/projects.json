@@ -2,9 +2,15 @@
   "title": "PROJECTS",
   "projects": [
     {
+      "logo": "/logos/thumbnailmarket.png",
+      "name": "Thumbnail Market",
+      "url": "thumbnail.market",
+      "description": "A marketplace to buy high CTR thumbnails"
+    },
+    {
       "logo": "/logos/bulkgen.png",
       "name": "BulkGen",
-      "url": "bulkgen.app",
+      "url": "bulkgen.sh",
       "description": "Generate Figma Designs from Google Sheets"
     },
     {
@@ -61,12 +67,6 @@
       "name": "UX Market",
       "url": "ux.market",
       "description": "A marketplace for the world's best UI components"
-    },
-    {
-      "logo": "/logos/thumbnailmarket.png",
-      "name": "Thumbnail Market",
-      "url": "thumbnail.market",
-      "description": "A marketplace to buy high CTR thumbnails"
     },
     {
       "logo": "/logos/shitposting.png",

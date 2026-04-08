@@ -16,8 +16,8 @@ Clone the repository to get started:
 ```bash
 git clone https://github.com/yourusername/yOS.git
 cd yOS
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 Visit [http://localhost:3000](http://localhost:3000) to view the app.

@@ -69,9 +69,10 @@ export function Hero() {
           {/* Image - 25% width */}
           <div className="w-1/4 aspect-square relative">
             <Image
-              src="/yb-hero.jpg"
+              src="/yb-hero.webp"
               alt="Yash Bhardwaj"
               fill
+              sizes="25vw"
               className="rounded-lg object-cover"
               priority
             />
@@ -323,11 +324,11 @@ export function Hero() {
                 onMouseLeave={() => setIsHovering(false)}
               >
                 {age}
-                {isHovering && (
+                {isHovering ? (
                   <div className="absolute bottom-full left-1/2 mb-2 -translate-x-1/2 transform whitespace-nowrap rounded-full bg-gray-900 px-3 py-1 text-sm text-white shadow-lg">
                     {decimalAge.toFixed(9)}
                   </div>
-                )}
+                ) : null}
               </span>{' '}
               years old, based in Bombay
             </li>
@@ -432,10 +433,11 @@ export function Hero() {
       {/* Desktop Image - 3 columns */}
       <div className="hidden md:block md:col-span-3">
         <Image
-          src="/yb-hero.jpg"
+          src="/yb-hero.webp"
           alt="Yash Bhardwaj"
           width={400}
           height={400}
+          sizes="(max-width: 768px) 0px, 25vw"
           className="rounded-lg"
           priority
         />

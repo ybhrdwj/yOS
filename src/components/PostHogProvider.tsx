@@ -1,59 +1,47 @@
 "use client"
 
-import posthog from "posthog-js";
-import { PostHogProvider as PHProvider, usePostHog } from "posthog-js/react";
 import { Suspense, useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
-export function PostHogProvider({ children }: { children: React.ReactNode }) {
+let posthogInstance: typeof import("posthog-js").default | null = null;
+
+export function PostHogAnalytics() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // Defer PostHog initialization until after hydration
-    // This reduces initial bundle impact and improves FCP/LCP
-    const timer = setTimeout(() => {
+    import("posthog-js").then((posthogModule) => {
+      const posthog = posthogModule.default;
       posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
         api_host: 'https://www.yashbhardwaj.com/ingest',
         ui_host: 'https://us.posthog.com',
-        capture_pageview: false, // We capture pageviews manually
-        capture_pageleave: true, // Enable pageleave capture
+        capture_pageview: false,
+        capture_pageleave: true,
       });
-    }, 0);
-
-    return () => clearTimeout(timer);
+      posthogInstance = posthog;
+    });
   }, []);
 
   return (
-    <PHProvider client={posthog}>
-      <SuspendedPostHogPageView />
-      {children}
-    </PHProvider>
+    <Suspense fallback={null}>
+      <PostHogPageView />
+    </Suspense>
   );
 }
 
 function PostHogPageView() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const posthog = usePostHog();
 
   useEffect(() => {
-    if (pathname && posthog) {
+    if (pathname && posthogInstance) {
       let url = window.origin + pathname;
       const search = searchParams.toString();
       if (search) {
         url += "?" + search;
       }
-      posthog.capture("$pageview", { "$current_url": url });
+      posthogInstance.capture("$pageview", { "$current_url": url });
     }
-  }, [pathname, searchParams, posthog]);
+  }, [pathname, searchParams]);
 
   return null;
-}
-
-function SuspendedPostHogPageView() {
-  return (
-    <Suspense fallback={null}>
-      <PostHogPageView />
-    </Suspense>
-  );
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useMemo } from 'react'
 
 interface MDXContentProps {
   content: string
@@ -46,12 +46,7 @@ function parseMarkdown(content: string): string {
 }
 
 export function MDXContent({ content }: MDXContentProps) {
-  const [htmlContent, setHtmlContent] = useState('')
-
-  useEffect(() => {
-    const parsed = parseMarkdown(content)
-    setHtmlContent(parsed)
-  }, [content])
+  const htmlContent = useMemo(() => parseMarkdown(content), [content])
 
   return (
     <div 
